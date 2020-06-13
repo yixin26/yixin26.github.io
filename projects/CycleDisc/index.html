@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html><head>
+	<title> A general and efficient method for finding cycles in 3D curve networks </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../../assets/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="../../assets/css/project_style.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../../assets/css/project_iconize.css">
+    
+     
+</head>
+
+
+<body>
+
+<div id="paper-title"> <h1> A general and efficient method for finding cycles in 3D curve networks </h1> </div>
+
+<div id="venue">SIGGRAPH Asia 2013</div>
+
+<div id="author-list">  
+	<a href="http://www.yixin.io/"> Yixin Zhuang<sup>1,2</sup> </a>
+	<a href="http://www.cse.wustl.edu/~zoum/"> Ming Zou<sup>2</sup>  </a>
+	<a href="https://research.adobe.com/person/nathan-carr/"> Nathan Carr<sup>3</sup> </a>
+	<a href="http://www.cs.wustl.edu/~taoju/"> Tao Ju<sup>2</sup> </a>
+</div>
+
+<div id="author-affiliation">
+	<span class="affiliation"> <sup>1</sup>National University of Defense Technology</span>
+	<span class="affiliation"> <sup>2</sup>Washington University in St.Louis </span>
+	<span class="affiliation"> <sup>3</sup>Adobe </span>
+</div>
+
+
+<div id="teaser-part">
+	<a class="imageLink" href="../../images/fulls/CycleDisc_teaser.png"><img id="teaser" src="../../images/fulls/CycleDisc_teaser.png" alt="Teaser"></a>
+</div>
+
+<div id="abstract">
+	<h2 class="caption"> Abstract </h2>
+	<p class="paragraph">  
+		Generating surfaces from 3D curve networks has been a longstanding problem in computer graphics. Recent attention to this area has resurfaced as a result of new sketch based modeling systems. In this work we present a new algorithm for finding cycles that bound surface patches. Unlike prior art in this area, the output of our technique is unrestricted, generating both manifold and non-manifold geometry with arbitrary genus. The novel insight behind our method is to formulate our problem as finding local mappings at the vertices and curves of our network, where each mapping describes how incident curves are grouped into cycles. This approach lends us the efficiency necessary to present our system in an interactive design modeler, whereby the user can adjust patch constraints and change the manifold properties of curves while the system automatically re-optimizes the solution.
+  </p>
+</div>
+
+<div id="package">  
+	<a id="paper-item" href="CycleDisc_SA13.pdf"> paper</a>
+	<a id="paper-item" href="supplement.pdf"> Supplemental</a>
+    <a id="code-item" href="CycleDisc_Demo_Data.zip"> demo+data</a>
+</div>
+
+
+<div id="video">
+	<h2 class="caption"> Video </h2>
+	<br>		
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/v7tbgo6pUHU?rel=0&vq=hd1080" frameborder="0" allowfullscreen></iframe>
+	<div id="venue">
+	<strong>Fast Forward Video</strong><br>
+	Available at Youtube. Please watch the high resolution version.<br>
+    Download the video <a href="cycleDiscovery_FastForward.wmv">here.</a>
+	<br><br><br>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/VflZXQvSqm0?rel=0&vq=hd1080" frameborder="0" allowfullscreen></iframe>
+	<div id="venue">
+	<strong>Full Video</strong><br>
+	Available at Youtube. Please watch the high resolution version.<br>
+    Download the video <a href="cycleDiscovery.mp4">here.</a>
+	
+</div>
+	
+</div>
+
+<div id="acknowledgement">
+	<h2 class="caption"> Bibtex </h2>	
+  <p class="bibtex"> 
+	@article {CycleDisc13,<br>
+    title = {A general and efficient method for finding cycles in 3D curve networks },<br>
+    author = {Yixin Zhuang, Ming Zou, Nathan Carr, and Tao Ju}<br>
+    journal = {Acm Transactions on Graphics, (Siggraph Asia 2013)},<br>
+    year = {2013},<br>
+    volume = {32},<br>
+    number = {6},<br>
+    pages = {1-10}<br>
+}
+  </p>
+</div>
+
+<div id="acknowledgement">
+	<h2 class="caption"> Acknowledgment </h2>
+	<p class="paragraph">We thank the authors of [Bae et al. 2008;
+Schmidt et al. 2009] for providing the curve sketches, WiZ WORX
+for the wireframe of Gehaeuse, Open CASCADE shape factory for
+misc2 and FIRST CAD library for kk35. The work is supported
+in part by NSF grants (IIS-0846072, IIS-1302142) and a gift from
+Adobe. The work of the first author was done at Washington University
+with the support from China Scholarship Council.
+	</p>
+</div>
+
+<div id="footer2">
+	<a href="#">top </a>
+	<div></div>
+</div>
+
+<!-- Google Analytics -->
+<script async src="file://www.google-analytics.com/analytics.js"></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62259258-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body></html>

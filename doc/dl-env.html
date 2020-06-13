@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<body  bgcolor="#EEEEEE">
+<div style="background:#FFFFFF; width:840px; align:center; margin:auto;padding:30px">
+
+<h1 style="font-size:40px" >Deep Learning Developping Environment Setup</h1>
+<br>
+<h4 ><font color="#6495ED">安装完系统后，将软件源更新为国内，加快下载和更新速度</font> </h4>
+备份 sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak <br>
+修改 sudo gedit /etc/apt/sources.list<br>
+
+<b>将source.list文件内容替换成下面</b><br>
+从此下载https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/<br>
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释<br>
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse<br>
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse<br>
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse<br>
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse<br>
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse<br>
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse<br>
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse<br>
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse<br>
+<br>
+
+<b>更新源和更新软件</b><br>
+sudo apt-get update<br>
+sudo apt-get upgrade<br>
+
+<hr>
+
+<h4><font color="#6495ED">安装Nvdia driver, cuda, cudnn</font></h4>
+到NVIDIA官网下载，注意版本。<br>
+<b>安装opengl</b><br>
+如果要运行cuda sample里面的opengl程序，或者其他基于gl的程序，安装opengl。不晚于cuda安装（在cuda之后安装，出现了多个libGL版本，容易出错）。<br>
+建立基本编译环境 sudo apt-get install build-essential<br>
+安装OpenGL Library: sudo apt-get install libgl1-mesa-dev<br>
+安装OpenGL Utilities: sudo apt-get install libglu1-mesa-dev<br>
+安装OpenGL Utility ToolKit: sudo apt-get install freeglut3-dev<br>
+找代码编译进行测试： gcc -o test-opengl test-opengl.c -lGL -lGLU -lglut<br>
+<br>
+<b>禁用nouveau</b><br>
+sudo -s<br>
+echo "blacklist nouveau" >>/etc/modprobe.d/blacklist.conf<br>
+重新生成initrd文件<br>
+sudo mv /boot/initrd.img-$(uname -r)  /boot/initrd.img-$(uname -r)-nouveau<br>
+sudo update-initramfs -u  <br>
+编辑/etc/default/grub让ubuntu显示引导信息，方便以后调试维护<br>
+sudo vi /etc/default/grub<br>
+将GRUB_CMDLINE_LINUX_DEFAULT=里的quiet去掉，splash改为nosplash<br>
+然后sudo update-grub<br>
+重启系统，可以用命令  lsmod | grep nouveau验证是否正确屏蔽了nouveau<br>
+<b>运行sudo /etc/init.d/lightdm stop，然后使用ctrl+alt+f1进入tty1</b><br>
+<br>
+<b>安装NVIDIA-Linux-x86_64-xxx.xx.run</b><br>
+sudo sh NVIDIA-Linux-x86_64-xxx.xx.run<br>
+<br>
+<b>安装cudax.x.xx自带驱动及toolkit，samples</b><br>
+sudo sh cuda_x.x.xx_linux.run --no-opengl-libs, (很可能失败，见后面分析)<br>
+toolkit安装在默认路径：/usr/local/cuda-x.x<br>
+Samples安装在~/NVIDIA_CUDA-x.x_Samples/<br>
+添加环境变量<br>
+echo 'export PATH=/usr/local/cuda/bin:$PATH' >>~/.bashrc  <br>
+echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >>~/.bashrc  <br>
+然后source ~/.bashrc使环境变量生效 <br>
+<br>
+<b>安装cudnn x.x</b><br>
+cp cudnn-x.x-linux-x64-vx.tgz ~<br>
+cd /usr/local <br>
+sudo tar zxvf ~/cudnn-x.x-linux-x64-vx.tgz <br>
+<br>
+
+<b>安装cuda失败</b><br>
+第一种可能性：<br>
+ubuntu and cuda 版本不兼容. 16.4的ubuntu内核有很多，比如目前到了4.15，但是4.4.0才支持cuda9.1,所以要另外安装旧版本内容，并从旧内核启动，重新安排一系列.<br>
+安装 kernel: sudo apt-get install linux-headers-4.4.0-xx-generic linux-image-4.4.0-xx-generic <br>
+更新到引导去 grub: sudo update-grub<br>
+默认情况下系统不进入引导，稍微修改下引导 grub: sudo gedit /etc/default/grub <br>
+ "GRUB_DEFAULT=saved" "GRUB_HIDDEN.."注释掉，add "GRUB_SAVEDEFAULT=true" and save the file <br>
+更新引导并重新启动: sudo update-grub & reboot<br>
+选择合适的内核，并重新安装，不行的放，可能就要将nvidia的一系列更新到最新吧，以上是别人成功的做法，however我还是不work，直接上cuda10,cudnn10,然后直接通过<br>
+查看cuda 和 cudnn版本，nvcc --verison 或 cat /usr/local/cuda/version.txt & cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2<br>
+nvidia-smi查看显卡运行信息<br>
+<br>
+<b>cuda测试</b><br>
+试试cuda sample中的例子。 进入NVIDIA_CUDA-x.0_Samples, 选择一个任意例子，make一下，run一把。<br>
+常见的Make的错误：1）opnengl库找不到，就是libGlu.so找不到，提示-lGL不存在，解决办法：通过“locate libGlu.so"找到位置，创建一个软链接"ln -s xxx/libGLu.so.xxx /usr/lib/libGlu.so"，或者链接到/usr/lib/x86_64-linux-gnu/，让gcc能够找到。<br>
+还有可能缺失glut库，可通过“apt-get install freeglut3-dev”添加。<br>
+有一个很酷的3D Demo： ~/NVIDIA_CUDA-8.0_Samples/5_Simulations/nbody。Make后，./nbody运行。<br>
+我遇到一种问题，就是有多个libGL.so，但是只有一个是对的，默认情况下找的是错的，要手动修改，把正确的放到默认文件夹，或者告诉编译器去哪个文件夹找“gcc -o test test.c -L/where", 用-L表示lib的文件夹。<br>
+另外一种错误暂时无解，就是已经编译成功，执行时候，cuda和opengl的互操作失败，有可能是opengl用的gpu错误。<br>
+
+<hr>
+
+<h4><font color="#6495ED">Anaconda 创建 tensorflow环境 并安装 tensorflow</font></h4>
+安装tensorflow官方流程见https://tensorflow.google.cn/install<br>
+两种安装方式，全局（system install）和局部，建议创建局部的开发空间（virtual env install）来安装，这样可以创建多个不同版本的空间，版本间不互相影响。<br>
+一个虚拟空间基本就在一个文件夹内，可以直接创建并激活，建议使用conda来管理。<br>
+去https://www.anaconda.com/download/#linux 下载 Anaconda3-20xx.xx-Linux-x86_64.sh，并安装 bash xxx.<br>
+默认安装在home文件夹下，安装完运行conda --version测试下。<br>
+创建虚拟空间以待安装tf，跑 conda create -n tensorflow python=3.5，结束后激活空间，conda activate tensorflow。<br>
+找到你想要安装的tf版本的url，通过pip install --ignore-installed --upgrade packageURL安装。<br>
+url可能在https://tensorflow.google.cn/install/pip最下方找到，不同python版本和gpu/cpu版本有不同的链接。<br>
+测试是否成功 python -c "import tensorflow as tf; tf.enable_eager_execution(); print(tf.reduce_sum(tf.random_normal([1000, 1000])))"<br>
+或者进入python运行“import tensorflow as tf / 
+hello = tf.constant('first tensorflow') / 
+sess = tf.Session() / 
+print sess.run(hello)”, python3之后print变函数了，写成print(sess.run(hello))就不会报错<br>
+<br>
+<b>tf未能正确运行</b><br>
+安装完未报错，但是却不能运行，提示cuda错误。比如我系统是cuda10, 但是tensorflow1.12，但是默认下却是在cuda9.0编译的，所以会出现 libcublas.so.9.0错误。可以把cuda降至9.0，但是我试验过，在ubuntu16下，在内核4.4.0和4.15.0我都装不成功cuda。另外一种方法就是用在cuda10下编译tf，有网友分享了自己编译的。目前刚出来的有tf1.13,官方是在cuda10下开发，可以下载了自己去编译。如果不想自己编译可以从这https://github.com/tensorflow/tensorflow/issues/22706下载whl文件来安装，我试了下能成功，不知道后面还有多少坑。<br>
+比较high-level的解释： rtx 2080ti是图灵架构，再前一个版本ivebrige，一般支持性都很好。目前cuda 10是支持图灵架构，已经2019了，tensorflow很快就会完美支持最新的cuda了。<br>
+<br>
+<h4><font color="#6495ED">Anaconda 创建 Pytorch环境 并安装 Pytorch</font></h4>
+创建虚拟空间pt，跑 conda create -n pt python=3.7，结束后激活空间，conda activate pt。<br>
+找到你想要安装的pt版本，通过conda install pytorch=...安装。<br>
+在安装前，可以自己指定源，清华TUNA（https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/） 还提供了 Anaconda 仓库的镜像，运行以下命令:<br>
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/<br>
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/<br>
+conda config --set show_channel_urls yes<br>
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/<br>
+测试是否成功 python -c "import torch;import torchvision; print(torch.cuda.is_available())"<br>
+<br>
+
+<hr>
+
+<h4><font color="#6495ED">安装输入法</font></h4>
+下载http://pinyin.sogou.com/linux/<br>
+安装sudo dpkg -i sogoupinyin_xxx.deb<br>
+安装没有成果时，运行sudo apt-get install -f 将fix失败。<br>
+打开“系统设置“，点击”语言支持“，然后弹出框图，点击安装，等待几分钟。<br>
+然后把里面的IBus改为fcitx，然后关掉，重启电脑。<br>
+重启电脑后，会看到屏幕右上角有企鹅输入fcitx，右键点开，选择ConfigureFcitx，点击弹出的框的左下方的”+“号，添加搜狗输入法，去掉那个只“显示当前语言”的选项，然后搜索框输入sog，你会发现搜狗输入法已经有了，选中输入法即可，然后关闭。<br>
+
+<hr>
+
+<h4><font color="#6495ED"> 安装vps ss</font></h4>
+<b>GUI版本安装</b><br>
+添加源：sudo add-apt-repository ppa:hzwhuang/ss-qt5<br>
+更新下载源：sudo apt-get update<br>
+安装：sudo apt-get install shadowsocks-qt5<br>
+在dash上搜索shadowsocks软件，运行，添加你的服务器和密码。<br>
+<b>本地设置</b><br>
+打开设置->网络->Network proxy->,方法选择manual，填Socks Host:127.0.0.1:8080，apply system wide。<br>
+ss打开时，网络也apply了，如果用firefox，需要在设置里面设置代理，如果是chrome就不需要。<br>
+
+<hr>
+
+<h4><font color="#6495ED">远程办公 </font></h4>
+去官网下载 https://www.teamviewer.com/cn/download/linux/<br>
+安装sudo dpkg -i  teamviewer_x.x.x_amd64.deb，可能出错，加执行sudo apt-get install -f<br>
+从dash打开。<br>
+<hr>
+
+
+<h4><font color="#6495ED">安装ssh-server </font></h4>
+sudo apt-get update<br>
+sudo apt-get install openssh-server<br>
+sudo /etc/init.d/ssh start<br>
+
+<hr>
+
+<h4><font color="#6495ED">更多实用的开发环境设置见 <a href="https://github.com/ChrisWu1997/EfficientResearchWork">https://github.com/ChrisWu1997/EfficientResearchWork</a></font></h4>
+
+<hr>
+
+<br><br>现在可以开始编程了，点击  <a href="3Dlearning.html">3D learning</a>
+</div>
+</body>
+</html>
+
