@@ -7,12 +7,12 @@
 <div style="background:#FFFFFF; width:880px; align:center; text-align:justify; margin:auto;padding:30px">
   
 	
-<a name="publication" align="center"><h1>Selected Research Projects</h1></a>
+<a name="research" align="center"><h1>Selected Research Projects</h1></a>
 <br><br>
 
-3D visual represents the main channel through which humans, or robot agents, understand and interact with each other and with the real world. As such, visual computing and learning technologies have been developed and applied in emerging applications, such as autonomous systems, augmented reality and digital production. 
+3D visual represents the main channel through which humans, or robot agents, understand and interact with each other and with the real world. As such, <b><i>visual computing and learning</i></b> technologies have been developed and applied in emerging applications, such as autonomous systems, augmented reality and digital production. 
 <br><br>
-This research covers several popular topics in the area of visual computing and learning, such as geometric deep learning, 3D vision and geometry modeling and processing. The target is to understand the process of 3D object creation for 3D modeling and analysis, and to find the relationship between 2D visual observation and the 3D world for human and/or robot interaction. Since 2019, We have brought in new concepts, such as sequential part representation and multimodal completion, to 3D generative tasks. We also expand the frontier of scene reconstruction and image localization problems by introducing new challenging scenerios, such as localization with few-shot observations and modeling with continuous changes. The intuition and achievement of each individual research project will be presented with more details in the following sections.
+This research covers several popular topics in the area of visual computing and learning, such as <i>geometric deep learning, 3D vision and geometry modeling and processing</i>. The target is to understand the process of 3D object creation for 3D modeling and analysis, and to find the relationship between 2D visual observation and the 3D world for human and/or robot interaction. Since 2019, We have brought in new concepts, such as sequential part representation and multimodal completion, to 3D generative tasks. We also expand the frontier of scene reconstruction and image localization problems by introducing new challenging scenerios, such as localization with few-shot observations and modeling with continuous changes. The intuition and achievement of each individual research project will be presented with more details in the following sections.
 <br><br>
 The current research only consider the geometry and structure properties of the 3D object or scene. Our future research will include modeling of texture, material and lighting properties. 
 A recent research trend has been introducing deep learning into traditional pure geometry problems for faster and more robust solutions. Therefore, other future researches will be revisiting some of those problems with deep learning tools and, specifically, more focusing on the issues of uncertainty or ambiguity modeling, which generally exists in real world while mostly ignored by traditional methods.
@@ -23,9 +23,9 @@ Visual computing and learning are on the verge of revolutionizing the way we com
 <a name="I. Geometric Deep Learning" ><h3>I. Geometric Deep Learning (2019-2020)</h3></a>
 
 <font size="4"></font>
-The research of geometric deep learning aims at understanding the process of 3D shape creation and generating realistic 3D objects with both high quality and diversity. This research is conducted at Visual Computing and Learning Lab in Peking University, led by Prof. Baoquan Chen. It is supported in part by a research grant from National Natural Science Foundation of China (No.61902007, "<b>Learning Deep Geometry Representation for High Resolution and Structure Preserved Shape Generation</b>"), led by Yixin Zhuang.
+This research of geometric deep learning aims at understanding the process of 3D shape creation and generating realistic 3D objects with both high quality and diversity. The key idea of this research is to connect 3D objects with different modalities of content, such as language, image and sketches, with which human can easily prototype their designing idea. Our first attempt is to represent shape using sentence-like representation, and learn to synthesize shape with RNN model. We also at the first time convey the ambiguity issue during progressive modeling or shape completion using conditional generative models. More progress will be revealed soon. This research is conducted at Visual Computing and Learning Lab in Peking University, led by Prof. Baoquan Chen. It is supported in part by a research grant from National Natural Science Foundation of China (No.61902007, "<b>Learning Deep Geometry Representation for High Resolution and Structure Preserved Shape Generation</b>"), led by Yixin Zhuang.
 
-<br><br>
+<br><br><br>
 
 	<table ><tbody><tr>
 	<td valign="center" align="center"  width="400" id="PQ-NET"><a href="http://www.yixin.io/projects/research.html"><img src="../images/thumbs/pq-net.jpg" width="370" height="200" border="0"></a>
@@ -38,7 +38,9 @@ The research of geometric deep learning aims at understanding the process of 3D 
 	<i>Key insight</i>: We introduce a deep neural network which represents and generates 3D shapes via <i>sequential part assembly</i>. In a way, we regard the assembly sequence as a "sentence" which organizes and describes the parts constituting a 3D shape. Our approach is inspired, in part, by the resemblance between speech and shape perception, as suggested by the seminal work of Biederman on recognition-by-components (RBC), and learns the process of structural understanding, i.e., to infer shape parts, their compositions, and inter-part relations.
 	</td>
 	</tr></tbody></table> 
+	
 <br><br>
+
 	<table><tbody><tr>
 	<td valign="center" align="center" width="400" id="multi-completion"><a href="http://www.yixin.io/projects/research.html"><img src="../images/thumbs/multi-completion.jpg" width="400" height="234" border="0"></a>
 	</td>
@@ -56,9 +58,9 @@ The research of geometric deep learning aims at understanding the process of 3D 
 
 <a name="II. 3D Vision" ><h3>II. 3D Vision (2019-2020)</h3></a>
 
-The research of 3D vision mainly investigates image based reconstruction and localization problems. We are working on several challenging scenerios, such as camera relocalization with only few-shot prior knowledge of the scene, progressively scene modeling with continuous object and layout changes, and some robotics related visual sensing and localization problems. This research is conducted at Visual Computing and Learning Lab in Peking University, led by Prof. Baoquan Chen. It is supported by several research grants from National Key R&D Program of China (No.2019YFF0302902, 2018YFB1403901).
+This research of 3D vision mainly investigates image based reconstruction and localization problems. We are working on several challenging scenerios, such as camera relocalization with only few-shot prior knowledge of the scene, progressively scene modeling with continuous object and layout changes, and some robotics related visual sensing and localization problems. This research is conducted at Visual Computing and Learning Lab in Peking University, led by Prof. Baoquan Chen. It is supported by several research grants from National Key R&D Program of China (No.2019YFF0302902, 2018YFB1403901).
 
-<br><br>
+<br><br><br>
 
 	<table><tbody><tr>
 	<td valign="top" align="center" width="400" id="fewshot-reloc"><a href="http://www.yixin.io/projects/research.html"><img src="../images/thumbs/fewshot-reloc.png" width="370" height="370" border="0"></a>
@@ -79,7 +81,7 @@ The research of 3D vision mainly investigates image based reconstruction and loc
 
 We investigated sketch based geometry modeling and processing. Sketch is one of the most compact geometric representations of an object. It perceptually describes the topology and geometry of one's underlying surface. This research is to infer the most plausible geometry from user sketches and to inversely find the most representative sketches from given geometry. Unlike deep learning based approaches, this research opted to the traditional workflow, in which low level differential geometry computation and high level domain knowledge inspired optimization are conducted. This research was done from 2012 to 2016, within the Ph.D period of Yixin Zhuang. 
 
-<br><br>
+<br><br><br>
 
 	<table><tbody><tr>
 	<td valign="center" align="center" width="400" id="CycleDisc"><a href="http://www.yixin.io/projects/research.html"><img src="../images/fulls/CycleDisc_teaser2.png" width="380" height="310" border="0"></a>
