@@ -16,7 +16,7 @@ mathematics, including calculus, linear algebra, probability and statistics, and
 the information loss and occlusion occurred during the imagery capture.
 
 ### Recommended Papers
-1. [DISN](DISN) Qiangeng Xu, Weiyue Wang, Duygu Ceylan, Radomir Mech, and Ulrich Neumann. Disn:
+1. [[DISN](DISN)] Qiangeng Xu, Weiyue Wang, Duygu Ceylan, Radomir Mech, and Ulrich Neumann. Disn:
 Deep implicit surface network for high-quality single-view 3d reconstruction.
  
 2. [Ladybird] Yifan Xu, Tianqi Fan, Yi Yuan, and Gurprit Singh. Ladybird: Quasi-monte carlo sampling
