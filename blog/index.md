@@ -11,10 +11,6 @@ reconstruction.
 ## Prerequisites
 mathematics, including calculus, linear algebra, probability and statistics, and the ability to write computer programs. 
 
-## Shape Generation
-
-## Geometry Feature Learning
-
 ## Single View Reconstruction
 3D shape reconstruction from a single image has been one of the central problems in computer vision. Empowering the machines with the ability to perceive the imagery and infer the underlying 3D shapes can benefit various downstream tasks, such as autonomous driving, robot navigation, etc. However, the problem is overly ambiguous and ill-posed, and thus remains highly challenging, due to
 the information loss and occlusion occurred during the imagery capture.
@@ -28,8 +24,8 @@ for deep implicit field based 3d reconstruction with symmetry. In European Confe
 Computer Vision, pages 248–263. Springer, 2020.
 
 
-
-## Neural 3D Renderer
-
 ## Shape Analysis
+To be added...
 
+## Shape Generation
+To be added...
